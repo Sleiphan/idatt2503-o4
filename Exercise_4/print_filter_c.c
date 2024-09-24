@@ -92,8 +92,9 @@ int main()
       {"Buns&Bozinos", "Buns&amp;Bozinos"},
       {"1<2", "1&lt;2"},
       {"cake>vegetables", "cake&gt;vegetables"},
-      {"cake>", "cake&g"},
-      {"cake>s", "cake&g"}};
+      {"cake>", "cake&g"}, // Edge case 1
+      {"cake>s", "cake&g"} // Edge case 2
+  };
 
   for (int i = 0; i < sizeof(samples) / sizeof(test_sample); ++i)
   {
