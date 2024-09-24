@@ -7,7 +7,7 @@ std::string replace_all_occurences(std::string source, char c, std::string repla
   while (pos != std::string::npos)
   {
     source.replace(pos, 1, replacement);
-    pos = source.find(c, pos + replacement.length()); // Move past the last replacement
+    pos = source.find(c, pos + replacement.length());
   }
 
   return source;
