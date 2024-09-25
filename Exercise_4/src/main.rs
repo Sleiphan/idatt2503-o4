@@ -15,8 +15,6 @@ struct TestSample {
 }
 
 fn main() {
-    println!("Hello, world!");
-
     let samples: [TestSample; 3] = [
         TestSample{input: String::from("Buns&Bozinos"), expected: String::from("Buns&amp;Bozinos")},
         TestSample{input: String::from("1<2"), expected: String::from("1&lt;2")},
