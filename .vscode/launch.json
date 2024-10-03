@@ -35,6 +35,15 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": []
-    }
+    },
+    {
+      "name": "Run Fuzzer",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/Exercise_4",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Cargo: Build",
+    },
   ]
 }

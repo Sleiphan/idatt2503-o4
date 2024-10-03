@@ -1,3 +1,4 @@
+#include "print_filter_c_fuzz.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -65,47 +66,4 @@ int string_to_html(char *buffer, const size_t source_size, const size_t buffer_s
   const int bytes_written = it_d - tmp_buf;
   free(tmp_buf);
   return bytes_written;
-}
-
-int test_convert(const char *source, const char *target, size_t source_element_count, size_t target_element_count)
-{
-  size_t buffer_size = target_element_count * sizeof(char);
-  char *buffer = (char *)malloc(buffer_size);
-
-  memcpy(buffer, source, target_element_count * sizeof(char));
-  int new_length = string_to_html(buffer, source_element_count, buffer_size);
-  int result = memcmp(buffer, target, target_element_count * sizeof(char));
-
-  free(buffer);
-  return result;
-}
-
-typedef struct test_sample
-{
-  const char input[64];
-  const char expected[64];
-} test_sample;
-
-int main()
-{
-  const test_sample samples[] = {
-      {"Buns&Bozinos", "Buns&amp;Bozinos"},
-      {"1<2", "1&lt;2"},
-      {"cake>vegetables", "cake&gt;vegetables"},
-      {"cake>", "cake&g"},  // Edge case 1
-      {"cake>s", "cake&g"}, // Edge case 2
-      {"\\001\\000", "\\001\\000"}};
-
-  for (int i = 0; i < sizeof(samples) / sizeof(test_sample); ++i)
-  {
-    int result = test_convert(
-        samples[i].input,
-        samples[i].expected,
-        strlen(samples[i].input) + 1,
-        strlen(samples[i].expected) + 1);
-
-    printf("Test %d: %d {\"%s\" -> \"%s\"}\n", i, result, samples[i].input, samples[i].expected);
-  }
-
-  return 0;
 }

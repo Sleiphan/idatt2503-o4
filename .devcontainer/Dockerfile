@@ -1,4 +1,4 @@
-FROM alpine:latest AS base
+FROM debian:latest AS base
 
-RUN apk update --no-cache
-RUN apk add --no-cache g++ gdb make cmake git github-cli rust cargo binutils nasm
+RUN apt update
+RUN apt install -y clang lldb make cmake git github-cli rust cargo binutils nasm

@@ -10,3 +10,4 @@ project(edu_ntnu_inft2503
     LANGUAGES C CXX)
 
 add_subdirectory(Exercise_4)
+add_subdirectory(Exercise_5)
