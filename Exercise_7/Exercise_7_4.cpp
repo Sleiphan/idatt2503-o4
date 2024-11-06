@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 
-void ceasar_shift(char *text, const int shift)
+void ceasar_shift(char *string, const int shift)
 {
   static const int LETTERS_IN_ALPHABET = 26;
 
-  const size_t text_len = strlen(text);
-  const char *end = text + text_len;
+  const size_t text_len = strlen(string);
+  const char *end = string + text_len;
 
   const char big_a = 'A';
   const char small_a = 'a';
 
-  for (char *it = text; it != end; ++it)
+  for (char *it = string; it != end; ++it)
   {
     const char &base = *it >= small_a ? small_a : big_a;
     char letter_idx = *it - base;
@@ -20,17 +20,17 @@ void ceasar_shift(char *text, const int shift)
   }
 }
 
-void affine_encryption(char *text, const int multiplier, const int shift)
+void affine_encryption(char *string, const int multiplier, const int shift)
 {
   static const int LETTERS_IN_ALPHABET = 26;
 
-  const size_t text_len = strlen(text);
-  const char *end = text + text_len;
+  const size_t text_len = strlen(string);
+  const char *end = string + text_len;
 
   const char big_a = 'A';
   const char small_a = 'a';
 
-  for (char *it = text; it != end; ++it)
+  for (char *it = string; it != end; ++it)
   {
     const char &base = *it >= small_a ? small_a : big_a;
     int letter_idx = *it - base;
@@ -48,12 +48,12 @@ int find_modulo_inverse(const int number, const int modulo, const int max_check)
   return -1;
 }
 
-void affine_decryption(char *text, const int multiplier, const int shift)
+void affine_decryption(char *string, const int multiplier, const int shift)
 {
   static const int LETTERS_IN_ALPHABET = 26;
 
-  const size_t text_len = strlen(text);
-  const char *end = text + text_len;
+  const size_t text_len = strlen(string);
+  const char *end = string + text_len;
 
   const char big_a = 'A';
   const char small_a = 'a';
@@ -62,7 +62,7 @@ void affine_decryption(char *text, const int multiplier, const int shift)
   if (modulo_inverse < 0)
     return;
 
-  for (char *it = text; it != end; ++it)
+  for (char *it = string; it != end; ++it)
   {
     const char &base = *it >= small_a ? small_a : big_a;
     int letter_idx = *it - base;
@@ -77,17 +77,9 @@ void affine_decryption(char *text, const int multiplier, const int shift)
 
 int main()
 {
-  char text[] = "RGMRQERQMZMZXMDENNZUQFD";
-  const char coprimes_to_26[] = {3, 5, 7, 9, 11, 15, 17, 19, 21};
+  char dict[] = "RBKKXRQ";
 
-  for (int a : coprimes_to_26)
-  {
-    for (int b = 0; b < 26; ++b)
-    {
-      char text_buf[sizeof(text)];
-      strcpy(text_buf, text);
-      affine_decryption(text_buf, a, b);
-      printf("%2d-%2d: %s\n", a, b, text_buf);
-    }
-  }
+  affine_decryption(dict, 3, 11);
+
+  printf("%s\n", dict);
 }
