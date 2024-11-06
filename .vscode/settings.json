@@ -71,6 +71,7 @@
     "stop_token": "cpp",
     "thread": "cpp",
     "variant": "cpp",
-    "*.ipp": "cpp"
+    "*.ipp": "cpp",
+    "map": "cpp"
   }
 }
